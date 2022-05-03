@@ -7,9 +7,9 @@ import pymongo
 from bson.objectid import ObjectId
 import plotly.graph_objs as go
 
-myclient = pymongo.MongoClient("mongodb://ia.dsa.21.a:tuJ6ZdJGWrEf8SAd6gb8ZaHUcs83HHJu@18.189.210.178:27017/?authSource=IA&readPreference=primary&directConnection=true&ssl=false")
-mydb = myclient["Ukdata"]
-mycol = mydb["Crime"]
+# myclient = pymongo.MongoClient("mongodb://ia.dsa.21.a:tuJ6ZdJGWrEf8SAd6gb8ZaHUcs83HHJu@18.189.210.178:27017/?authSource=IA&readPreference=primary&directConnection=true&ssl=false")
+# mydb = myclient["Ukdata"]
+# mycol = mydb["Crime"]
 
 app = dash.Dash()
 
@@ -31,4 +31,18 @@ app.layout = html.Div([
     Output('map-with-slider','figure'),
     [Input('year-slider','value')]
 )
+#################################################################################################
+class RealizedProfitLoss:
+    def __init__(self,df):
+        self.dataframe = df
+
+    def plot (self,start_date = None, end_date = None):
+        df = self.dataframe
+        if start_date:
+            df = df[df['date'] >= start_date]
+        if end_date:
+            df = df[df['date'] <= end_date]
+
+    def run_dash(self):
+        app = JupyterDash(__name__)
 
