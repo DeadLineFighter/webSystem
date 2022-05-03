@@ -1,6 +1,8 @@
 [submodule "model"]
 	path = model
 	url = https://github.com/DeadLineFighter/model.git
+	branch = main
 [submodule "template"]
 	path = template
 	url = https://github.com/DeadLineFighter/template.git
+	branch = main
