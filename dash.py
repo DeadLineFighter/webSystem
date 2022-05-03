@@ -12,14 +12,10 @@ myclient = pymongo.MongoClient("mongodb://ia.dsa.21.a:tuJ6ZdJGWrEf8SAd6gb8ZaHUcs
 mydb = myclient["Ukdata"]
 mycol = mydb["Crime"]
 
-app = dash.Dash()
-
-server = app.server
-
-
 external_stylesheets = [dbc.themes.BOOTSTRAP]
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 app.title = 'UK Dashboard'
+
 
 #########header#########
 colors = {
@@ -61,24 +57,8 @@ def generate_page_header():
                         )
     header = (main_header,subtitle_header)
     return header
-
-
-#################################################################################################
-class RealizedProfitLoss:
-    def __init__(self,df):
-        self.dataframe = df
-
-    def plot (self,start_date = None, end_date = None):
-        df = self.dataframe
-        if start_date:
-            df = df[df['date'] >= start_date]
-        if end_date:
-            df = df[df['date'] <= end_date]
-
-    def run_dash(self):
-        app = JupyterDash(__name__)
-
-######################################################################
+        
+########View#######
 app.layout = html.Div([
     dcc.Graph(id='map-with-slider'),
     dcc.Slider(
@@ -91,7 +71,9 @@ app.layout = html.Div([
     )
 ])
 
+
+########Controller#######
 @app.callback(
     Output('map-with-slider','figure'),
-    [Input('year-slider','value')]
-)
+    [Input('year-slider','value')])
+def map_from_uk(year):
