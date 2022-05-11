@@ -24,12 +24,9 @@ def search():
 
     return top_5_area.get_recommendations(input_data)
 
-@auth.route('/map', methods=['GET'])
-def test_dash():
+@auth.route('/dash', methods=['GET'])
+def dash():
 
-    postcode = request.values.get("postcode")
+    postcode = request.args.get("postcode")
 
     return redirect('/dash/?postcode='+postcode)
-
-    # return render_template('map.html', x=x, y=y)
-    #return top_5_area.get_recommendations(input_data) + json_util.dumps(col)

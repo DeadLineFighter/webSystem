@@ -8,13 +8,12 @@ from website.views import views
 from website.auth import auth
 import os
 
-#sys.path.append(sys.path.append(os.path.dirname(os.path.abspath(__file__))))
 template_dir = os.path.dirname(os.path.abspath(__file__))+"\\template"
 
 server = Flask(__name__, template_folder=template_dir)
-print(template_dir)
 
 external_scripts = ['https://d3js.org/d3.v5.min.js','https://cdnjs.cloudflare.com/ajax/libs/d3-cloud/1.2.5/d3.layout.cloud.min.js','https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js']
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 server.config['SECRET_KEY'] = 'DSA recommendation system FYP'
 
@@ -25,7 +24,8 @@ app = dash.Dash(
     __name__,
     server=server,
     routes_pathname_prefix='/dash/',
-    external_scripts=external_scripts
+    external_scripts=external_scripts,
+    external_stylesheets=external_stylesheets
 )
 
 app.layout = html.Div([
