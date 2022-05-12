@@ -1,6 +1,6 @@
 from http import server
 from requests import options
-from db import db
+from model.db import db
 import dash
 import pandas as pd
 import plotly.express as px
@@ -8,7 +8,7 @@ import pymongo
 import os
 from dash import Dash, dcc, html, Input, Output
 import dash_bootstrap_components as dbc
-from plotlyFunction import *
+from model.plotlyFunction import *
 from dash_ser import app
 
 
@@ -70,7 +70,7 @@ poi1 = POI_type("LS2")
 ##bodylayout##
 def bodylayout1(value):
 
-    x = html.Div(children=[
+    x1 = html.Div(children=[
     # All elements from the top of the page
     html.Div([
         html.Div([
@@ -82,13 +82,35 @@ def bodylayout1(value):
         html.Div([
             dcc.Graph(
                 id='graph2',
-                figure=POI_type(value)
+                figure=crime_month_line(value)
             ),  
         ], className='six columns'),
     ], className='row')
 ])
 
-    return x
+    return x1
+
+def bodylayout2(value):
+
+    x2 = html.Div(children=[
+    # All elements from the top of the page
+    html.Div([
+        html.Div([
+            dcc.Graph(
+                id='graph1',
+                figure=POI_type(value)
+            ),  
+        ], className='six columns'),
+        # html.Div([
+        #     dcc.Graph(
+        #         id='graph2',
+        #         figure=crime_month_line(value)
+        #     ),  
+        # ], className='six columns'),
+    ], className='row')
+])
+
+    return x2
 
     
 #layout1
@@ -201,7 +223,7 @@ layout2 = html.Div(
                                 id="tabs",
                                 active_tab='graph3',
                                 ),
-                            html.Div(id="tab-content",className="p-4")
+                            html.Div(id="content2",className="p-4")
                             ]
                         ),
                     ],width=9)

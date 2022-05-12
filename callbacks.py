@@ -17,11 +17,20 @@ from dash_ser import app
 #             return dcc.Graph(figure=poi1, id='graph')
 #     return "No tab selected"
 
+####Crime####
 @app.callback(Output('content1', 'children'),
               [Input('page2-dropdown', 'value')])
 def tab_content(value):
      if value is not None:
-        return bodylayout(value)
+        return bodylayout1(value)
+     return "No postcode selected"
+
+#####POI#####
+@app.callback(Output('content2', 'children'),
+              [Input('page2-dropdown', 'value')])
+def tab_content(value):
+     if value is not None:
+        return bodylayout2(value)
      return "No postcode selected"
 
 @app.callback(
