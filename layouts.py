@@ -44,10 +44,10 @@ def nav_bar():
         html.Hr(),
         dbc.Nav(
             [
-                dbc.NavLink("Crime", href="/crime",active="exact", external_link=True),
-                dbc.NavLink("POI", href="/poi", active="exact", external_link=True),
-                dbc.NavLink("School", href="/school", active="exact", external_link=True),
-                dbc.NavLink("Property", href="/property", active="exact", external_link=True)
+                dbc.NavLink("Crime", href="/dash/crime",active="exact", external_link=False),
+                dbc.NavLink("POI", href="/dash/poi", active="exact", external_link=False),
+                dbc.NavLink("School", href="/dash/school", active="exact", external_link=False),
+                dbc.NavLink("Property", href="/dash/property", active="exact", external_link=False)
             ],
             pills=True,
             vertical=True
@@ -56,15 +56,6 @@ def nav_bar():
     style=NAVBAR_STYLE,
     )  
     return navbar
-
-#graph 1
-crime_month1 = crime_month_line("LS1")
-
-#graph 2
-crime_month2 = crime_month_line("LS2")
-
-#graph 3
-poi1 = POI_type("LS2")
 
 
 ##bodylayout##
@@ -112,7 +103,50 @@ def bodylayout2(value):
 
     return x2
 
-    
+def bodylayout3(value):
+
+    x3 = html.Div(children=[
+    # All elements from the top of the page
+    html.Div([
+        html.Div([
+            dcc.Graph(
+                id='graph1',
+                figure=school_gender_pie(value)
+            ),  
+        ], className='six columns'),
+        # html.Div([
+        #     dcc.Graph(
+        #         id='graph2',
+        #         figure=crime_month_line(value)
+        #     ),  
+        # ], className='six columns'),
+    ], className='row')
+])
+
+def bodylayout4(value):
+
+    x4 = html.Div(children=[
+    # All elements from the top of the page
+    html.Div([
+        html.Div([
+            dcc.Graph(
+                id='graph1',
+                figure=property_pie_bar(value)
+            ),  
+        ], className='six columns'),
+        # html.Div([
+        #     dcc.Graph(
+        #         id='graph2',
+        #         figure=crime_month_line(value)
+        #     ),  
+        # ], className='six columns'),
+    ], className='row')
+])
+
+    return x4 
+
+
+
 #layout1
 layout1 = html.Div([
     html.H2("Crime"),
@@ -285,7 +319,7 @@ layout3 = html.Div(
                                 id="tabs",
                                 active_tab='graph3',
                                 ),
-                            html.Div(id="tab-content",className="p-4")
+                            html.Div(id="content3",className="p-4")
                             ]
                         ),
                     ],width=9)
@@ -347,7 +381,7 @@ layout4 = html.Div(
                                 id="tabs",
                                 active_tab='graph3',
                                 ),
-                            html.Div(id="tab-content",className="p-4")
+                            html.Div(id="content4",className="p-4")
                             ]
                         ),
                     ],width=9)

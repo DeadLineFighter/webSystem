@@ -33,6 +33,24 @@ def tab_content(value):
         return bodylayout2(value)
      return "No postcode selected"
 
+#####School#####
+@app.callback(Output('content3', 'children'),
+              [Input('page2-dropdown', 'value')])
+def tab_content(value):
+     if value is not None:
+        return bodylayout3(value)
+     return "No postcode selected"
+
+#####Property#####
+@app.callback(Output('content4', 'children'),
+              [Input('page2-dropdown', 'value')])
+def tab_content(value):
+     if value is not None:
+        return bodylayout4(value)
+     return "No postcode selected"
+
+
+####graph_click####
 @app.callback(
     Output("graph-text","children"),
     Input("graph","clickData"),

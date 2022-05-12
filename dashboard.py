@@ -17,15 +17,15 @@ app.layout = html.Div([
 @app.callback(Output('page-content', 'children'), 
               [Input('url', 'pathname')]) 
 def display_page(pathname):
-    if pathname == '/':
+    if pathname == '/dash/':
         return layout1
-    elif pathname == '/crime':
+    elif pathname == '/dash/crime':
         return layout1
-    elif pathname == '/poi':
+    elif pathname == '/dash/poi':
          return layout2
-    elif pathname == '/school':
+    elif pathname == '/dash/school':
         return layout3
-    elif pathname == '/property':
+    elif pathname == '/dash/property':
          return layout4
     else:
         return '404'
