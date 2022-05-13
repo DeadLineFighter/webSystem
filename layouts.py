@@ -21,7 +21,7 @@ NAVBAR_STYLE = {
     "bottom": 0,
     "width": "10rem",
     "padding": "1rem 1rem",
-    "background-color": "Orange",
+    "background-color": "grey",
 }
 
 CONTENT_STYLE = {
@@ -29,7 +29,7 @@ CONTENT_STYLE = {
     "margin-top":'2rem',
     "margin-left": "18rem",
     "margin-right": "2rem",
-    "width": "48rem",
+    "width": "150rem",
 }
 
 ##Components##
@@ -44,10 +44,10 @@ def nav_bar():
         html.Hr(),
         dbc.Nav(
             [
-                dbc.NavLink("Crime", href="/dash/crime",active="exact", external_link=False),
-                dbc.NavLink("POI", href="/dash/poi", active="exact", external_link=False),
-                dbc.NavLink("School", href="/dash/school", active="exact", external_link=False),
-                dbc.NavLink("Property", href="/dash/property", active="exact", external_link=False)
+                dbc.NavLink("Crime\n", href="/dash/crime",active="exact", external_link=True),
+                dbc.NavLink("Google POI\n", href="/dash/poi", active="exact", external_link=True),
+                dbc.NavLink("School\n", href="/dash/school", active="exact", external_link=True),
+                dbc.NavLink("Property\n", href="/dash/property", active="exact", external_link=True)
             ],
             pills=True,
             vertical=True
@@ -59,7 +59,7 @@ def nav_bar():
 
 
 ##bodylayout##
-def bodylayout1(value):
+def bodylayout1(value): #crime
 
     x1 = html.Div(children=[
     # All elements from the top of the page
@@ -81,7 +81,7 @@ def bodylayout1(value):
 
     return x1
 
-def bodylayout2(value):
+def bodylayout2(value): #poi
 
     x2 = html.Div(children=[
     # All elements from the top of the page
@@ -103,7 +103,7 @@ def bodylayout2(value):
 
     return x2
 
-def bodylayout3(value):
+def bodylayout3(value): #school
 
     x3 = html.Div(children=[
     # All elements from the top of the page
@@ -123,7 +123,7 @@ def bodylayout3(value):
     ], className='row')
 ])
 
-def bodylayout4(value):
+def bodylayout4(value): #property
 
     x4 = html.Div(children=[
     # All elements from the top of the page
@@ -147,7 +147,7 @@ def bodylayout4(value):
 
 
 
-#layout1
+#layout crime
 layout1 = html.Div([
     html.H2("Crime"),
     html.Hr(),
@@ -205,7 +205,7 @@ layout1 = html.Div([
 ])
 
 
-##layout2
+##layout poi
 layout2 = html.Div(
     [
         html.H2('POI'),
@@ -267,7 +267,7 @@ layout2 = html.Div(
         )
     ])
 
-##layout3
+##layout school
 layout3 = html.Div(
     [
         html.H2('School'),
@@ -329,7 +329,7 @@ layout3 = html.Div(
         )
     ])
 
-##layout4
+##layout property
 layout4 = html.Div(
     [
         html.H2('Property'),
