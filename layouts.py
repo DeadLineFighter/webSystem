@@ -29,7 +29,7 @@ CONTENT_STYLE = {
     "margin-top":'2rem',
     "margin-left": "18rem",
     "margin-right": "2rem",
-    "width": "150rem",
+    # "width": "100rem",
 }
 
 ##Components##
@@ -66,14 +66,20 @@ def bodylayout1(value): #crime
     html.Div([
         html.Div([
             dcc.Graph(
-                id='graph1',
+                id='graph',
                 figure=crime_month_line(value)
             ),  
         ], className='six columns'),
         html.Div([
             dcc.Graph(
-                id='graph2',
-                figure=crime_month_line(value)
+                id='graph',
+                figure=criTyp_line(value)
+            ),  
+        ], className='six columns'),
+        html.Div([
+            dcc.Graph(
+                id='graph',
+                figure=criTyp_sca(value)
             ),  
         ], className='six columns'),
     ], className='row')
@@ -88,16 +94,22 @@ def bodylayout2(value): #poi
     html.Div([
         html.Div([
             dcc.Graph(
-                id='graph1',
+                id='graph',
                 figure=POI_type(value)
             ),  
         ], className='six columns'),
-        # html.Div([
-        #     dcc.Graph(
-        #         id='graph2',
-        #         figure=crime_month_line(value)
-        #     ),  
-        # ], className='six columns'),
+        html.Div([
+            dcc.Graph(
+                id='graph',
+                figure=poiRat_bar(value)
+            ),  
+        ], className='six columns'),
+        html.Div([
+            dcc.Graph(
+                id='graph',
+                figure=higRat_sca(value)
+            ),  
+        ], className='six columns'),
     ], className='row')
 ])
 
@@ -110,18 +122,20 @@ def bodylayout3(value): #school
     html.Div([
         html.Div([
             dcc.Graph(
-                id='graph1',
+                id='graph',
                 figure=school_gender_pie(value)
             ),  
         ], className='six columns'),
         # html.Div([
         #     dcc.Graph(
         #         id='graph2',
-        #         figure=crime_month_line(value)
+        #         figure=schPha_bar(value)
         #     ),  
         # ], className='six columns'),
     ], className='row')
 ])
+
+    return x3
 
 def bodylayout4(value): #property
 
@@ -130,16 +144,22 @@ def bodylayout4(value): #property
     html.Div([
         html.Div([
             dcc.Graph(
-                id='graph1',
+                id='graph',
                 figure=property_pie_bar(value)
             ),  
         ], className='six columns'),
-        # html.Div([
-        #     dcc.Graph(
-        #         id='graph2',
-        #         figure=crime_month_line(value)
-        #     ),  
-        # ], className='six columns'),
+        html.Div([
+            dcc.Graph(
+                id='graph',
+                figure=chaPie(value)
+            ),  
+        ], className='six columns'),
+        html.Div([
+            dcc.Graph(
+                id='graph',
+                figure=avgPri_pieBar(value)
+            ),  
+        ], className='six columns'),
     ], className='row')
 ])
 
