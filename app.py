@@ -9,7 +9,10 @@ from website.views import views
 from website.auth import auth
 import dash_bootstrap_components as dbc
 
-server = Flask(__name__)
+
+template_dir = os.path.dirname(os.path.abspath(__file__))+"//template"
+
+server = Flask(__name__, template_folder=template_dir)
 
 server.register_blueprint(views, url_prefix='/')
 server.register_blueprint(auth, url_prefix='/')
