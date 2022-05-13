@@ -1,7 +1,6 @@
 from flask import Blueprint, request, render_template, redirect, url_for
 from model.recommender_engine import RecommenderEngine
 from model.db import *
-from bson import json_util
 import numpy as np
 # from collections import Counter
 
