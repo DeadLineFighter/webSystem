@@ -7,10 +7,11 @@ from requests import options
 from model.plotlyFunction import *
 import dash_bootstrap_components as dbc
 
-server = Flask(__name__)
+if __name__ == '__main__':
+    server = Flask(__name__)
 
-server.register_blueprint(views, url_prefix='/')
-server.register_blueprint(auth, url_prefix='/')
+    server.register_blueprint(views, url_prefix='/')
+    server.register_blueprint(auth, url_prefix='/')
 
 # external_scripts = ['https://d3js.org/d3.v5.min.js','https://cdnjs.cloudflare.com/ajax/libs/d3-cloud/1.2.5/d3.layout.cloud.min.js','https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js']
 # external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
