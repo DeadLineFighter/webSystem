@@ -7,21 +7,21 @@ from requests import options
 from model.plotlyFunction import *
 import dash_bootstrap_components as dbc
 
-if __name__ == '__main__':
-    server = Flask(__name__)
-
-    server.register_blueprint(views, url_prefix='/')
-    server.register_blueprint(auth, url_prefix='/')
-
-# external_scripts = ['https://d3js.org/d3.v5.min.js','https://cdnjs.cloudflare.com/ajax/libs/d3-cloud/1.2.5/d3.layout.cloud.min.js','https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js']
-# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+server = Flask(__name__)
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css',
+    {
+        'href': 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
+        'rel': 'stylesheet',
+        'integrity': 'BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u',
+        'crossorigin': 'anonymous'
+    }]
 
 app = dash.Dash(
     __name__,
     server=server,
     routes_pathname_prefix='/dash/',
-    external_stylesheets = [dbc.themes.CYBORG]
-    # external_stylesheets = external_stylesheets
+    # external_stylesheets = [dbc.themes.CYBORG]
+    external_stylesheets = external_stylesheets
 )
 app.title = 'UK Dashboard'
 
@@ -34,9 +34,10 @@ NAVBAR_STYLE = {
     "top": 0,
     "left": 8,
     "bottom": 0,
-    "width": "11rem",
+    "width": "15rem",
     "padding": "1rem 1rem",
     "background-color": "grey",
+    "font-size": "20pt"
 }
 
 CONTENT_STYLE = {
@@ -44,7 +45,8 @@ CONTENT_STYLE = {
     "margin-top":'2rem',
     "margin-left": "18rem",
     "margin-right": "2rem",
-    # "width": "100rem",
+    "width": "100rem",
+    "font-size": "15pt"
 }
 
 ##Components##
@@ -55,7 +57,7 @@ def nav_bar():
     """
     navbar = html.Div(
     [
-        html.H4("UK Data Dashboard", className="display-10",style={'textAlign':'center'}),
+        html.H4("UK Data Dashboard", className="display-10",style={'textAlign':'center','font-size':'20pt'}),
         html.Hr(),
         dbc.Nav(
             [
@@ -85,7 +87,7 @@ def bodylayout1(p): #crime
                 id='crime_graph',
                 
             ),  
-        ], className='six columns'),
+        ], className='six columns',row=1,column = 3),
         html.Div([
             dcc.Graph(
                 id='crime_graph2',
@@ -119,7 +121,7 @@ def bodylayout2(p): #poi
                 id='poi_graph3',
                 
             ),  
-        ], className='six columns'),
+        ], className='twelve columns'),
     ], className='row')
 ])
 
@@ -147,13 +149,13 @@ def bodylayout3(p): #school
                 id='school_graph3',
                 
             ),  
-        ], className='six columns'),
+        ], className='twelve columns'),
     ], className='row')
 ])
 
     return x3
 
-def bodylayout4(value): #property
+def bodylayout4(p): #property
 
     x4 = html.Div(children=[
     # All elements from the top of the page
@@ -175,7 +177,7 @@ def bodylayout4(value): #property
                 id='pro_graph3',
                 
             ),  
-        ], className='six columns'),
+        ], className='twelve columns'),
     ], className='row')
 ])
 
@@ -219,7 +221,13 @@ def layout1(x):
                     ],
                     width=12
                 ),
-                
+                dbc.Col(
+                    [
+                        
+                        html.P('Click on graph to display the detail', id='graph-text')
+                    ],
+                    width=12
+                )               
                 
             ],
         ), 
@@ -270,7 +278,14 @@ def layout2(x):
                             html.Div(id="content2",className="p-4")
                             ]
                         ),
-                    ],width=12)
+                    ],width=12),
+                dbc.Col(
+                    [
+                        
+                        html.P('Click on graph to display the detail', id='graph-text')
+                    ],
+                    width=12
+                )    
                     ]
                 ),
             ]
@@ -320,7 +335,14 @@ def layout3(x):
                             html.Div(id="content3",className="p-4")
                             ]
                         ),
-                    ],width=12)
+                    ],width=12),
+                dbc.Col(
+                    [
+                        
+                        html.P('Click on graph to display the detail', id='graph-text')
+                    ],
+                    width=12
+                )    
                     ]
                 ),
             ]
@@ -371,7 +393,14 @@ def layout4(x):
                             html.Div(id="content4",className="p-4")
                             ]
                         ),
-                    ],width=12)
+                    ],width=12),
+                dbc.Col(
+                    [
+                        
+                        html.P('Click on graph to display the detail', id='graph-text')
+                    ],
+                    width=12
+                )    
                     ]
                 ),
             ]
