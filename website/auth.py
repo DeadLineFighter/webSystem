@@ -22,11 +22,6 @@ def search():
 
     top_5_area = RecommenderEngine()
 
-    return top_5_area.get_recommendations(input_data)
+    area = top_5_area.get_recommendations(input_data)
 
-@auth.route('/dash', methods=['GET'])
-def dash():
-
-    postcode = request.args.get("postcode")
-
-    return redirect('/dash/?postcode='+postcode)
+    return redirect('/dash/?postcode='+area[0]['postcode']+'&postcode='+area[1]['postcode']+'&postcode='+area[2]['postcode']+'&postcode='+area[3]['postcode']+'&postcode='+area[4]['postcode'])
