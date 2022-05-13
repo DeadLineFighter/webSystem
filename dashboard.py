@@ -8,13 +8,17 @@ from model.plotlyFunction import *
 import dash_bootstrap_components as dbc
 
 server = Flask(__name__)
+
+server.register_blueprint(views, url_prefix='/')
+server.register_blueprint(auth, url_prefix='/')
+
 # external_scripts = ['https://d3js.org/d3.v5.min.js','https://cdnjs.cloudflare.com/ajax/libs/d3-cloud/1.2.5/d3.layout.cloud.min.js','https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js']
 # external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(
     __name__,
     server=server,
-    # routes_pathname_prefix='/dash/',
+    routes_pathname_prefix='/dash/',
     external_stylesheets = [dbc.themes.CYBORG]
     # external_stylesheets = external_stylesheets
 )
@@ -29,7 +33,7 @@ NAVBAR_STYLE = {
     "top": 0,
     "left": 8,
     "bottom": 0,
-    "width": "10rem",
+    "width": "11rem",
     "padding": "1rem 1rem",
     "background-color": "grey",
 }
@@ -67,9 +71,10 @@ def nav_bar():
     )  
     return navbar
 
+x = []
 
 ##bodylayout##
-def bodylayout1(value): #crime
+def bodylayout1(p): #crime
 
     x1 = html.Div(children=[
     # All elements from the top of the page
@@ -91,7 +96,7 @@ def bodylayout1(value): #crime
 
     return x1
 
-def bodylayout2(value): #poi
+def bodylayout2(p): #poi
 
     x2 = html.Div(children=[
     # All elements from the top of the page
@@ -119,7 +124,7 @@ def bodylayout2(value): #poi
 
     return x2
 
-def bodylayout3(value): #school
+def bodylayout3(p): #school
 
     x3 = html.Div(children=[
     # All elements from the top of the page
@@ -178,7 +183,8 @@ def bodylayout4(value): #property
 
 
 #layout crime
-layout1 = html.Div([
+def layout1(x): 
+    y = html.Div([
     html.H2("Crime"),
     html.Hr(),
     dbc.Container([
@@ -193,7 +199,7 @@ layout1 = html.Div([
                                     value='abc',
                                     options=[
                                         {'label': '{}'.format(i), 'value': i} for i in [
-                                        "BL0", "BL1", "BL2", "BL3", "BL4", "BL5"
+                                        x[0],x[1],x[2],x[3],x[4]
                                         ]
         ]
                                 ),
@@ -205,16 +211,7 @@ layout1 = html.Div([
                     [
                         html.Div(
                             [
-                            html.H4('Crime_month'),
-                            #create tabs
-                            dbc.Tabs(
-                                [
-                                    dbc.Tab(label='graph1',tab_id='graph1'),
-                                    # dbc.Tab(label='graph2',tab_id='graph2')
-                                ],
-                                id="tabs",
-                                active_tab='graph1',
-                                ),
+                            html.H4('Crime'),
                             html.Div(id="content1",className="p-4")
                             ]
                         ),
@@ -222,22 +219,18 @@ layout1 = html.Div([
                     width=12
                 ),
                 
-                dbc.Col(
-                    [
-                        
-                        html.P('Click on graph to display the detail', id='graph-text')
-                    ],
-                    width=12
-                )
                 
             ],
         ), 
     ]),
 ])
 
+    return y
 
 ##layout poi
-layout2 = html.Div(
+def layout2(x):
+    
+    y = html.Div(
     [
         html.H2('POI'),
         html.Hr(),
@@ -253,28 +246,13 @@ layout2 = html.Div(
                                     id='page2-dropdown',
                                     options=[
                                         {'label': '{}'.format(i), 'value': i} for i in [
-                                        "BL0", "BL1", "BL2", "BL3", "BL4", "BL5"
+                                        x[0],x[1],x[2],x[3],x[4]
                                         ]
         ]
                                 ),
                                 html.Div(id='selected-dropdown')
                             ],
                             width=6
-                        ),
-                        dbc.Col(
-                            [
-                                html.H4('(Some filter /Slide)'),
-                                html.Hr(),
-                                dcc.RadioItems(
-                                    id='poi-buttons',
-                                    options = [
-                                        {'label':'{}'.format(i), 'value': i} for i in [
-                                        'School ', 'Hotel ', 'Bus stop ','....'
-                                        ]
-                                    ]
-                                ),
-                                html.Div(id='selected-button')
-                            ],
                         ),
                         dbc.Col(
                     [
@@ -291,15 +269,18 @@ layout2 = html.Div(
                             html.Div(id="content2",className="p-4")
                             ]
                         ),
-                    ],width=9)
+                    ],width=12)
                     ]
                 ),
             ]
         )
     ])
 
+    return y
+
 ##layout school
-layout3 = html.Div(
+def layout3(x):
+    y = html.Div(
     [
         html.H2('School'),
         html.Hr(),
@@ -315,28 +296,13 @@ layout3 = html.Div(
                                     id='page2-dropdown',
                                     options=[
                                         {'label': '{}'.format(i), 'value': i} for i in [
-                                        "BL0", "BL1", "BL2", "BL3", "BL4", "BL5"
+                                        x[0],x[1],x[2],x[3],x[4]
                                         ]
         ]
                                 ),
                                 html.Div(id='selected-dropdown')
                             ],
                             width=6
-                        ),
-                        dbc.Col(
-                            [
-                                html.H4('(Some filter /Slide)'),
-                                html.Hr(),
-                                dcc.RadioItems(
-                                    id='poi-buttons',
-                                    options = [
-                                        {'label':'{}'.format(i), 'value': i} for i in [
-                                        'School ', 'Hotel ', 'Bus stop ','....'
-                                        ]
-                                    ]
-                                ),
-                                html.Div(id='selected-button')
-                            ],
                         ),
                         dbc.Col(
                     [
@@ -353,15 +319,19 @@ layout3 = html.Div(
                             html.Div(id="content3",className="p-4")
                             ]
                         ),
-                    ],width=9)
+                    ],width=12)
                     ]
                 ),
             ]
         )
     ])
 
+    return y
+
 ##layout property
-layout4 = html.Div(
+def layout4(x):
+    
+    y = html.Div(
     [
         html.H2('Property'),
         html.Hr(),
@@ -377,28 +347,13 @@ layout4 = html.Div(
                                     id='page2-dropdown',
                                     options=[
                                         {'label': '{}'.format(i), 'value': i} for i in [
-                                        "BL0", "BL1", "BL2", "BL3", "BL4", "BL5"
+                                        x[0],x[1],x[2],x[3],x[4]
                                         ]
         ]
                                 ),
                                 html.Div(id='selected-dropdown')
                             ],
                             width=6
-                        ),
-                        dbc.Col(
-                            [
-                                html.H4('(Some filter /Slide)'),
-                                html.Hr(),
-                                dcc.RadioItems(
-                                    id='poi-buttons',
-                                    options = [
-                                        {'label':'{}'.format(i), 'value': i} for i in [
-                                        'School ', 'Hotel ', 'Bus stop ','....'
-                                        ]
-                                    ]
-                                ),
-                                html.Div(id='selected-button')
-                            ],
                         ),
                         dbc.Col(
                     [
@@ -415,27 +370,15 @@ layout4 = html.Div(
                             html.Div(id="content4",className="p-4")
                             ]
                         ),
-                    ],width=9)
+                    ],width=12)
                     ]
                 ),
             ]
         )
     ])
-###############################CALLBACK###############################
 
-# @app.callback(
-#     Output("tab-content", "children"),
-#     Input("tabs", "active_tab"),
-# )
-# def render_tab_content(active_tab):
-#     if active_tab is not None:
-#         if active_tab == "graph1":
-#             return dcc.Graph(figure=crime_month1, id='graph')
-#         elif active_tab == "graph2":
-#             return dcc.Graph(figure=crime_month2, id='graph')
-#         elif active_tab == "graph3":
-#             return dcc.Graph(figure=poi1, id='graph')
-#     return "No tab selected"
+    return y
+###############################CALLBACK###############################
 
 ###crime
 #1
@@ -572,20 +515,23 @@ app.layout = html.Div([
 ])
 
 @app.callback(Output('page-content', 'children'), 
-              [Input('url', 'pathname')]) 
+              [Input('url', 'href')]) 
 def display_page(pathname):
-    if pathname == '/dash/':
-        return layout1
-    elif pathname == '/dash/crime':
-        return layout1
-    elif pathname == '/dash/poi':
-         return layout2
-    elif pathname == '/dash/school':
-        return layout3
-    elif pathname == '/dash/property':
-         return layout4
-    else:
-        return '404'
+
+    if (pathname):
+        param = urllib.parse.urlparse(pathname)
+        param_dict = urllib.parse.parse_qs(param.query)
+        if 'postcode' in param_dict.keys():
+            for i in range(len(param_dict['postcode'])):
+                x.append(param_dict['postcode'][i])  
+        if pathname == 'http://127.0.0.1:5000/dash/crime':
+            return layout1(x)
+        elif pathname == 'http://127.0.0.1:5000/dash/poi':
+            return layout2(x)
+        elif pathname == 'http://127.0.0.1:5000/dash/school':
+            return layout3(x)
+        elif pathname == 'http://127.0.0.1:5000/dash/property':
+            return layout4(x)
 
 if __name__ == '__main__':
-    app.run_server(port=5000, host= '127.0.0.1',debug=False)
+    server.run(debug=False)
