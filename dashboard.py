@@ -46,7 +46,9 @@ def dashboard(server):
         "margin-left": "18rem",
         "margin-right": "2rem",
         "width": "100rem",
-        "font-size": "15pt"
+        "font-size": "15pt",
+        "background-color": "#474A76",
+        "font-color":"#E0E0E0"
     }
 
     ##Components##
@@ -87,13 +89,13 @@ def dashboard(server):
                     id='crime_graph',
                     
                 ),  
-            ], className='six columns',row=1,column = 3),
+            ], className='twelve columns'),
             html.Div([
                 dcc.Graph(
                     id='crime_graph2',
                 
                 ),  
-            ], className='six columns'),
+            ], className='twelve columns'),
         ], className='row')
     ])
 
@@ -263,22 +265,6 @@ def dashboard(server):
                                 ],
                                 width=6
                             ),
-                            dbc.Col(
-                        [
-                            html.Div(
-                                [
-                                html.H4('POI_type'),
-                                dbc.Tabs(
-                                    [
-                                        dbc.Tab(label='graph2',tab_id='graph2')  
-                                    ],
-                                    id="tabs",
-                                    active_tab='graph2',
-                                    ),
-                                html.Div(id="content2",className="p-4")
-                                ]
-                            ),
-                        ],width=12),
                     dbc.Col(
                         [
                             
@@ -320,22 +306,6 @@ def dashboard(server):
                                 ],
                                 width=6
                             ),
-                            dbc.Col(
-                        [
-                            html.Div(
-                                [
-                                html.H4('School'),
-                                dbc.Tabs(
-                                    [
-                                        dbc.Tab(label='graph3',tab_id='graph3')  
-                                    ],
-                                    id="tabs",
-                                    active_tab='graph3',
-                                    ),
-                                html.Div(id="content3",className="p-4")
-                                ]
-                            ),
-                        ],width=12),
                     dbc.Col(
                         [
                             
@@ -378,22 +348,6 @@ def dashboard(server):
                                 ],
                                 width=6
                             ),
-                            dbc.Col(
-                        [
-                            html.Div(
-                                [
-                                html.H4('Property'),
-                                dbc.Tabs(
-                                    [
-                                        dbc.Tab(label='graph4',tab_id='graph4')  
-                                    ],
-                                    id="tabs",
-                                    active_tab='graph4',
-                                    ),
-                                html.Div(id="content4",className="p-4")
-                                ]
-                            ),
-                        ],width=12),
                     dbc.Col(
                         [
                             
