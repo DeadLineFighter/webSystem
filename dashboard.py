@@ -35,20 +35,20 @@ def dashboard(server):
         "left": 8,
         "bottom": 0,
         "width": "15rem",
-        "padding": "1rem 1rem",
-        "background-color": "grey",
-        "font-size": "20pt"
+        "padding": "1rem 2rem",
+        "background-color": "#474A76",
+        "font-size": "20pt",
+        "color": "#E0E0E0"
     }
 
     CONTENT_STYLE = {
+        "position": "fixed",
         "top":0,
         "margin-top":'2rem',
         "margin-left": "18rem",
         "margin-right": "2rem",
-        "width": "100rem",
-        "font-size": "15pt",
-        "background-color": "#474A76",
-        "font-color":"#E0E0E0"
+        "width": "auto",
+        "font-size": "15pt"
     }
 
     ##Components##
@@ -201,7 +201,6 @@ def dashboard(server):
                                     html.Hr(),
                                     dcc.Dropdown(
                                         id='page2-dropdown',
-                                        value='abc',
                                         options=[
                                             {'label': '{}'.format(i), 'value': i} for i in [
                                             x[0],x[1],x[2],x[3],x[4]
@@ -221,7 +220,7 @@ def dashboard(server):
                                 ]
                             ),
                         ],
-                        width=12
+                        width="auto"
                     ),
                     dbc.Col(
                         [
@@ -265,6 +264,14 @@ def dashboard(server):
                                 ],
                                 width=6
                             ),
+                            dbc.Col(
+                        [
+                            html.Div(
+                                [
+                                html.Div(id="content2",className="p-4")
+                                ]
+                            ),
+                        ],width="auto"),
                     dbc.Col(
                         [
                             
@@ -306,6 +313,14 @@ def dashboard(server):
                                 ],
                                 width=6
                             ),
+                            dbc.Col(
+                        [
+                            html.Div(
+                                [
+                                html.Div(id="content3",className="p-4")
+                                ]
+                            ),
+                        ],width="auto"),
                     dbc.Col(
                         [
                             
@@ -348,6 +363,14 @@ def dashboard(server):
                                 ],
                                 width=6
                             ),
+                            dbc.Col(
+                        [
+                            html.Div(
+                                [
+                                html.Div(id="content4",className="p-4")
+                                ]
+                            ),
+                        ],width="auto"),
                     dbc.Col(
                         [
                             
@@ -369,7 +392,6 @@ def dashboard(server):
     @app.callback(Output('crime_graph','figure'),
                     [Input('page2-dropdown','value')])
     def fig_content(postcode):
-        print("123")
         return crime_month_line(pd.DataFrame(countMonthCrime(postcode)))
     #2
     @app.callback(Output('crime_graph2','figure'),
