@@ -6,8 +6,13 @@ import numpy as np
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/search', methods=['GET'])
+@auth.route('/search')
 def search():
+    
+    return render_template('search.html')
+
+@auth.route('/search_page', methods=['GET'])
+def search_page():
 
     edu=request.values.get("edu")
     food=request.values.get("food")

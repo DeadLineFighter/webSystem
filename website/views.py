@@ -4,4 +4,5 @@ views = Blueprint('views', __name__)
 
 @views.route('/')
 def index():
-    return render_template('search.html')
+    
+    return render_template('Home.html')
