@@ -42,7 +42,6 @@ def dashboard(server):
     }
 
     CONTENT_STYLE = {
-        "position": "fixed",
         "top":0,
         "margin-top":'2rem',
         "margin-left": "18rem",
@@ -76,7 +75,6 @@ def dashboard(server):
         )  
         return navbar
 
-    x = []
 
     ##bodylayout##
     def bodylayout1(p): #crime
@@ -96,7 +94,7 @@ def dashboard(server):
                 
                 ),  
             ], className='twelve columns'),
-        ], className='row')
+        ], className='column')
     ])
 
         return x1
@@ -186,7 +184,7 @@ def dashboard(server):
         return x4 
 
 
-
+    x = []
     #layout crime
     def layout1(x): 
         y = html.Div([
@@ -523,7 +521,6 @@ def dashboard(server):
     @app.callback(Output('page-content', 'children'), 
                 [Input('url', 'href')]) 
     def display_page(pathname):
-
         if (pathname):
             param = urllib.parse.urlparse(pathname)
             param_dict = urllib.parse.parse_qs(param.query)
