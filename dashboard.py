@@ -77,11 +77,32 @@ def dashboard(server):
 
 
     ##bodylayout##
+    def maplayout(p): #map
+        x1 = html.Div(children=[
+        html.Div([
+            html.Div([
+                dcc.Graph(
+                    id='map_graph',
+                    figure=plotMap(p)
+                
+                ),  
+            ], className='nine columns'),
+        ], className='row')
+    ])
+
+        return x1
     def bodylayout1(p): #crime
 
         x1 = html.Div(children=[
         # All elements from the top of the page
         html.Div([
+            # html.Div([
+            #     dcc.Graph(
+            #         id='map_graph',
+            #         figure=plotMap(p)
+                
+            #     ),  
+            # ], className='six columns'),
             html.Div([
                 dcc.Graph(
                     id='crime_graph',
@@ -94,7 +115,7 @@ def dashboard(server):
                 
                 ),  
             ], className='twelve columns'),
-        ], className='column')
+        ], className='row')
     ])
 
         return x1
@@ -104,6 +125,13 @@ def dashboard(server):
         x2 = html.Div(children=[
         # All elements from the top of the page
         html.Div([
+            # html.Div([
+            #     dcc.Graph(
+            #         id='map_graph',
+            #         figure=plotMap(p)
+                
+            #     ),  
+            # ], className='five columns'),
             html.Div([
                 dcc.Graph(
                     id='poi_graph',
@@ -213,6 +241,16 @@ def dashboard(server):
                         [
                             html.Div(
                                 [
+                                html.Div(id="map",className="p-4")
+                                ]
+                            ),
+                        ],
+                        width="auto"
+                    ),
+                    dbc.Col(
+                        [
+                            html.Div(
+                                [
                                 html.H4('Crime'),
                                 html.Div(id="content1",className="p-4")
                                 ]
@@ -266,6 +304,16 @@ def dashboard(server):
                         [
                             html.Div(
                                 [
+                                html.Div(id="map",className="p-4")
+                                ]
+                            ),
+                        ],
+                        width="auto"
+                    ),
+                            dbc.Col(
+                        [
+                            html.Div(
+                                [
                                 html.Div(id="content2",className="p-4")
                                 ]
                             ),
@@ -311,6 +359,16 @@ def dashboard(server):
                                 ],
                                 width=6
                             ),
+                            dbc.Col(
+                        [
+                            html.Div(
+                                [
+                                html.Div(id="map",className="p-4")
+                                ]
+                            ),
+                        ],
+                        width="auto"
+                    ),                            
                             dbc.Col(
                         [
                             html.Div(
@@ -361,6 +419,16 @@ def dashboard(server):
                                 ],
                                 width=6
                             ),
+                            dbc.Col(
+                        [
+                            html.Div(
+                                [
+                                html.Div(id="map",className="p-4")
+                                ]
+                            ),
+                        ],
+                        width="auto"
+                    ),                            
                             dbc.Col(
                         [
                             html.Div(
@@ -436,7 +504,8 @@ def dashboard(server):
     @app.callback(Output('pro_graph','figure'),
                     [Input('page2-dropdown','value')])
     def fig_content(postcode):
-        return pro_line(pd.DataFrame(rightmoveProperty(postcode)))
+        return avgPri_pieBar(pd.DataFrame(rightmoveAvgPrice(postcode)))
+
     #2
     @app.callback(Output('pro_graph2','figure'),
                     [Input('page2-dropdown','value')])
@@ -446,9 +515,14 @@ def dashboard(server):
     @app.callback(Output('pro_graph3','figure'),
                     [Input('page2-dropdown','value')])
     def fig_content(postcode):
-        return avgPri_pieBar(pd.DataFrame(rightmoveAvgPrice(postcode)))
+        return pro_line(pd.DataFrame(rightmoveProperty(postcode)))
 
-    
+    ####map####
+    @app.callback(Output('map', 'children'),
+                [Input('page2-dropdown', 'value')])
+    def tab_content(value):
+        return maplayout(value)
+
     ####Crime####
     @app.callback(Output('content1', 'children'),
                 [Input('page2-dropdown', 'value')])
