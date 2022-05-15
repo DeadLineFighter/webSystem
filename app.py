@@ -4,6 +4,8 @@ import os
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__))+"\\model")
 template_dir = os.path.dirname(os.path.abspath(__file__))+"\\template"
+static_dir = os.path.dirname(os.path.abspath(__file__))+"\\template"
+
 from website.views import views
 from website.auth import auth
 from dashboard import dashboard
