@@ -458,7 +458,7 @@ def dashboard(server):
     @app.callback(Output('crime_graph','figure'),
                     [Input('page2-dropdown','value')])
     def fig_content(postcode):
-        return crime_month_line(pd.DataFrame(countMonthCrime(postcode)))
+        return criMon_line(pd.DataFrame(countMonthCrime(postcode)))
     #2
     @app.callback(Output('crime_graph2','figure'),
                     [Input('page2-dropdown','value')])
