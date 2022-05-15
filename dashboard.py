@@ -35,9 +35,10 @@ def dashboard(server):
         "left": 8,
         "bottom": 0,
         "width": "15rem",
-        "padding": "1rem 1rem",
-        "background-color": "grey",
-        "font-size": "20pt"
+        "padding": "1rem 2rem",
+        "background-color": "#474A76",
+        "font-size": "20pt",
+        "color": "#E0E0E0"
     }
 
     CONTENT_STYLE = {
@@ -45,7 +46,7 @@ def dashboard(server):
         "margin-top":'2rem',
         "margin-left": "18rem",
         "margin-right": "2rem",
-        "width": "100rem",
+        "width": "auto",
         "font-size": "15pt"
     }
 
@@ -74,26 +75,46 @@ def dashboard(server):
         )  
         return navbar
 
-    x = []
 
     ##bodylayout##
+    def maplayout(p): #map
+        x1 = html.Div(children=[
+        html.Div([
+            html.Div([
+                dcc.Graph(
+                    id='map_graph',
+                    figure=plotMap(p)
+                
+                ),  
+            ], className='nine columns'),
+        ], className='row')
+    ])
+
+        return x1
     def bodylayout1(p): #crime
 
         x1 = html.Div(children=[
         # All elements from the top of the page
         html.Div([
+            # html.Div([
+            #     dcc.Graph(
+            #         id='map_graph',
+            #         figure=plotMap(p)
+                
+            #     ),  
+            # ], className='six columns'),
             html.Div([
                 dcc.Graph(
                     id='crime_graph',
                     
                 ),  
-            ], className='six columns',row=1,column = 3),
+            ], className='twelve columns'),
             html.Div([
                 dcc.Graph(
                     id='crime_graph2',
                 
                 ),  
-            ], className='six columns'),
+            ], className='twelve columns'),
         ], className='row')
     ])
 
@@ -104,6 +125,13 @@ def dashboard(server):
         x2 = html.Div(children=[
         # All elements from the top of the page
         html.Div([
+            # html.Div([
+            #     dcc.Graph(
+            #         id='map_graph',
+            #         figure=plotMap(p)
+                
+            #     ),  
+            # ], className='five columns'),
             html.Div([
                 dcc.Graph(
                     id='poi_graph',
@@ -184,7 +212,7 @@ def dashboard(server):
         return x4 
 
 
-
+    x = []
     #layout crime
     def layout1(x): 
         y = html.Div([
@@ -199,7 +227,6 @@ def dashboard(server):
                                     html.Hr(),
                                     dcc.Dropdown(
                                         id='page2-dropdown',
-                                        value='abc',
                                         options=[
                                             {'label': '{}'.format(i), 'value': i} for i in [
                                             x[0],x[1],x[2],x[3],x[4]
@@ -214,12 +241,22 @@ def dashboard(server):
                         [
                             html.Div(
                                 [
+                                html.Div(id="map",className="p-4")
+                                ]
+                            ),
+                        ],
+                        width="auto"
+                    ),
+                    dbc.Col(
+                        [
+                            html.Div(
+                                [
                                 html.H4('Crime'),
                                 html.Div(id="content1",className="p-4")
                                 ]
                             ),
                         ],
-                        width=12
+                        width="auto"
                     ),
                     dbc.Col(
                         [
@@ -267,18 +304,20 @@ def dashboard(server):
                         [
                             html.Div(
                                 [
-                                html.H4('POI_type'),
-                                dbc.Tabs(
-                                    [
-                                        dbc.Tab(label='graph2',tab_id='graph2')  
-                                    ],
-                                    id="tabs",
-                                    active_tab='graph2',
-                                    ),
+                                html.Div(id="map",className="p-4")
+                                ]
+                            ),
+                        ],
+                        width="auto"
+                    ),
+                            dbc.Col(
+                        [
+                            html.Div(
+                                [
                                 html.Div(id="content2",className="p-4")
                                 ]
                             ),
-                        ],width=12),
+                        ],width="auto"),
                     dbc.Col(
                         [
                             
@@ -324,18 +363,20 @@ def dashboard(server):
                         [
                             html.Div(
                                 [
-                                html.H4('School'),
-                                dbc.Tabs(
-                                    [
-                                        dbc.Tab(label='graph3',tab_id='graph3')  
-                                    ],
-                                    id="tabs",
-                                    active_tab='graph3',
-                                    ),
+                                html.Div(id="map",className="p-4")
+                                ]
+                            ),
+                        ],
+                        width="auto"
+                    ),                            
+                            dbc.Col(
+                        [
+                            html.Div(
+                                [
                                 html.Div(id="content3",className="p-4")
                                 ]
                             ),
-                        ],width=12),
+                        ],width="auto"),
                     dbc.Col(
                         [
                             
@@ -382,18 +423,20 @@ def dashboard(server):
                         [
                             html.Div(
                                 [
-                                html.H4('Property'),
-                                dbc.Tabs(
-                                    [
-                                        dbc.Tab(label='graph4',tab_id='graph4')  
-                                    ],
-                                    id="tabs",
-                                    active_tab='graph4',
-                                    ),
+                                html.Div(id="map",className="p-4")
+                                ]
+                            ),
+                        ],
+                        width="auto"
+                    ),                            
+                            dbc.Col(
+                        [
+                            html.Div(
+                                [
                                 html.Div(id="content4",className="p-4")
                                 ]
                             ),
-                        ],width=12),
+                        ],width="auto"),
                     dbc.Col(
                         [
                             
@@ -415,8 +458,7 @@ def dashboard(server):
     @app.callback(Output('crime_graph','figure'),
                     [Input('page2-dropdown','value')])
     def fig_content(postcode):
-        print("123")
-        return crime_month_line(pd.DataFrame(countMonthCrime(postcode)))
+        return criMon_line(pd.DataFrame(countMonthCrime(postcode)))
     #2
     @app.callback(Output('crime_graph2','figure'),
                     [Input('page2-dropdown','value')])
@@ -462,7 +504,8 @@ def dashboard(server):
     @app.callback(Output('pro_graph','figure'),
                     [Input('page2-dropdown','value')])
     def fig_content(postcode):
-        return pro_line(pd.DataFrame(rightmoveProperty(postcode)))
+        return avgPri_pieBar(pd.DataFrame(rightmoveAvgPrice(postcode)))
+
     #2
     @app.callback(Output('pro_graph2','figure'),
                     [Input('page2-dropdown','value')])
@@ -472,9 +515,14 @@ def dashboard(server):
     @app.callback(Output('pro_graph3','figure'),
                     [Input('page2-dropdown','value')])
     def fig_content(postcode):
-        return avgPri_pieBar(pd.DataFrame(rightmoveAvgPrice(postcode)))
+        return pro_line(pd.DataFrame(rightmoveProperty(postcode)))
 
-    
+    ####map####
+    @app.callback(Output('map', 'children'),
+                [Input('page2-dropdown', 'value')])
+    def tab_content(value):
+        return maplayout(value)
+
     ####Crime####
     @app.callback(Output('content1', 'children'),
                 [Input('page2-dropdown', 'value')])
@@ -547,7 +595,6 @@ def dashboard(server):
     @app.callback(Output('page-content', 'children'), 
                 [Input('url', 'href')]) 
     def display_page(pathname):
-
         if (pathname):
             param = urllib.parse.urlparse(pathname)
             param_dict = urllib.parse.parse_qs(param.query)
