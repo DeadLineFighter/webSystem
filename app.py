@@ -10,7 +10,7 @@ from website.auth import auth
 from dashboard import dashboard
 
 server = Flask(__name__, template_folder=template_dir, static_folder=template_dir)
-
+#ooo
 server.register_blueprint(views, url_prefix='/')
 server.register_blueprint(auth, url_prefix='/')
 app = dashboard(server)
